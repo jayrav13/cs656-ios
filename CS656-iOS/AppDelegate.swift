@@ -17,6 +17,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Remove token to force log out
+        // LocalAPI.removeUserToken()
+        
+        // If a token is set, move to the ConnectionsListViewController
+        if(LocalAPI.userTokenSet()) {
+            let clvc : ConnectionsListViewController = ConnectionsListViewController()
+            window?.rootViewController = UINavigationController(rootViewController: clvc)
+        }
+        // Else, move to te UserManagementController
+        else {
+            let umc : UserManagementController = UserManagementController()
+            window?.rootViewController = UINavigationController(rootViewController: umc)
+        }
+        
+        // Make Key and Visible
+        window?.makeKeyAndVisible()
         return true
     }
 
