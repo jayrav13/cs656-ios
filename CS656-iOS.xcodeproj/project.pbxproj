@@ -20,6 +20,7 @@
 		E5C2C4EC1CADB55A006FE861 /* LocalAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C2C4EB1CADB55A006FE861 /* LocalAPI.swift */; };
 		E5FDE9D21CB751C9005F1DAB /* ConnectionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FDE9D11CB751C9005F1DAB /* ConnectionsListViewController.swift */; };
 		E5FDE9D51CB805F7005F1DAB /* DisplayQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FDE9D41CB805F7005F1DAB /* DisplayQRCodeViewController.swift */; };
+		E5FDE9D71CB8958D005F1DAB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FDE9D61CB8958D005F1DAB /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		E5C2C4EB1CADB55A006FE861 /* LocalAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAPI.swift; sourceTree = "<group>"; };
 		E5FDE9D11CB751C9005F1DAB /* ConnectionsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionsListViewController.swift; sourceTree = "<group>"; };
 		E5FDE9D41CB805F7005F1DAB /* DisplayQRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayQRCodeViewController.swift; sourceTree = "<group>"; };
+		E5FDE9D61CB8958D005F1DAB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				E5FDE9D31CB805EA005F1DAB /* QR Code */,
 				E5B35FD01CB34465007A1BBD /* UserManagementController.swift */,
 				E5FDE9D11CB751C9005F1DAB /* ConnectionsListViewController.swift */,
+				E5FDE9D61CB8958D005F1DAB /* SettingsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				E5B35FD11CB34465007A1BBD /* UserManagementController.swift in Sources */,
 				E5C2C4EC1CADB55A006FE861 /* LocalAPI.swift in Sources */,
 				E5968ED31C65D8A500712F31 /* CS656_iOS.xcdatamodeld in Sources */,
+				E5FDE9D71CB8958D005F1DAB /* SettingsViewController.swift in Sources */,
 				E5218E931C670C9300B02918 /* Standard.swift in Sources */,
 				E5FDE9D51CB805F7005F1DAB /* DisplayQRCodeViewController.swift in Sources */,
 				E5FDE9D21CB751C9005F1DAB /* ConnectionsListViewController.swift in Sources */,

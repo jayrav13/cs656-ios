@@ -17,6 +17,7 @@ class DisplayQRCodeViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
+        self.title = "Scan Now!"
         
         self.imageView = UIImageView()
         self.imageView.frame = CGRect(x: Standard.screenWidth * 0.2, y: Standard.screenHeight * 0.5 - Standard.screenWidth * 0.3, width: Standard.screenWidth * 0.6, height: Standard.screenWidth * 0.6)

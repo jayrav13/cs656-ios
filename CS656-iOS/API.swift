@@ -74,6 +74,44 @@ class API {
         }
     }
     
+    static func getUser(completion : (success: Bool, data: JSON) -> Void) -> Void {
+        
+        let parameters : [String : AnyObject] = [
+            "token" : LocalAPI.getUserToken()
+        ]
+        
+        Alamofire.request(Method.GET, baseURL + "/user/get", parameters: parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { (response) -> Void in
+            
+            if(response.response?.statusCode == 200) {
+                completion(success: true, data: JSON(response.result.value!))
+            }
+            else {
+                completion(success: false, data: nil)
+            }
+            
+        }
+        
+    }
+    
+    static func logoutUser(completion : (success : Bool, data : JSON) -> Void) -> Void {
+        
+        let parameters : [String : AnyObject] = [
+            "token" : LocalAPI.getUserToken()
+        ]
+        
+        Alamofire.request(Method.POST, baseURL + "/user/logout", parameters: parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { (response) -> Void in
+            
+            if(response.response?.statusCode == 200) {
+                completion(success: true, data: JSON(response.result.value!))
+            }
+            else {
+                completion(success: false, data: nil)
+            }
+            
+        }
+        
+    }
+    
     static func relationshipList(completion : (success : Bool, data : JSON) -> Void) -> Void {
         
         let parameters : [String : AnyObject] = [
