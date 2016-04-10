@@ -174,7 +174,7 @@ class UserManagementController : UIViewController, UIScrollViewDelegate, UIGestu
                 self.view.window?.rootViewController = UINavigationController(rootViewController: ConnectionsListViewController())
             }
             else {
-                self.presentViewController(Standard.generateAlert("Error", message: "Login failed - please try again!"), animated: true, completion: { () -> Void in
+                self.presentViewController(Standard.generateAlert("Error", message: "Login failed - please try again!", completion: {}), animated: true, completion: { () -> Void in
                     
                 })
             }
@@ -191,7 +191,7 @@ class UserManagementController : UIViewController, UIScrollViewDelegate, UIGestu
                 self.view.window?.rootViewController = UINavigationController(rootViewController: ConnectionsListViewController())
             }
             else {
-                self.presentViewController(Standard.generateAlert("Error", message: "Registration failed - please try again!"), animated: true, completion: { () -> Void in
+                self.presentViewController(Standard.generateAlert("Error", message: "Registration failed - please try again!", completion: {}), animated: true, completion: { () -> Void in
                     
                 })
             }

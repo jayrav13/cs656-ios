@@ -160,6 +160,30 @@ class API {
         
     }
     
+    /* 
+     *  Relationship Management 
+     */
+    static func addConnection(connection_token : String, completion : (success : Bool, data : JSON) -> Void) -> Void {
+        
+        let parameters : [String : AnyObject] = [
+            "token" : LocalAPI.getUserToken(),
+            "connection_token" : connection_token
+        ]
+        
+        Alamofire.request(Method.POST, baseURL + "/relationship/add", parameters: parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { (response) in
+            
+            if(response.response?.statusCode == 200) {
+                completion(success: true, data: JSON(response.result.value!))
+            }
+            else {
+                // return message to display error
+                completion(success: false, data: JSON(response.result.value!))
+            }
+            
+        }
+        
+    }
+    
     /*
      *  Companies
      */

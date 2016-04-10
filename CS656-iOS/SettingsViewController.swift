@@ -229,12 +229,12 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
         API.editUser(self.nameTextField.text!, email: self.emailTextField.text!, twitter: self.twitterTextField.text!, linkedin: self.linkedinTextField.text!, resume: self.resumeTextField.text!, website: self.websiteTextField.text!) { (success, data) -> Void in
             
             if(success) {
-                self.presentViewController(Standard.generateAlert("Success", message: "Profile edited successfully!"), animated: true, completion: { () -> Void in
+                self.presentViewController(Standard.generateAlert("Success", message: "Profile edited successfully!", completion: {}), animated: true, completion: { () -> Void in
                     
                 })
             }
             else {
-                self.presentViewController(Standard.generateAlert("Error", message: "Unable to edit profile."), animated: true, completion: { () -> Void in
+                self.presentViewController(Standard.generateAlert("Error", message: "Unable to edit profile.", completion: {}), animated: true, completion: { () -> Void in
                     
                 })
             }
@@ -243,7 +243,7 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
     }
     
     func didFinishTask(companyName : String) {
-        self.presentViewController(Standard.generateAlert("Success", message: "Company updated!"), animated: true, completion: { () -> Void in
+        self.presentViewController(Standard.generateAlert("Success", message: "Company updated!", completion: {}), animated: true, completion: { () -> Void in
             self.companiesCell.textLabel?.text = companyName
         })
     }

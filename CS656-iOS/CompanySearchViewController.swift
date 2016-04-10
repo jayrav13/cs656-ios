@@ -70,7 +70,7 @@ class CompanySearchViewController : UIViewController, UITableViewDelegate, UITab
                 self.delegate?.didFinishTask(self.data["response"][indexPath.row]["company_name"].stringValue)
             }
             else {
-                self.presentViewController(Standard.generateAlert("Error", message: "Company could not be updated."), animated: true, completion: { () -> Void in
+                self.presentViewController(Standard.generateAlert("Error", message: "Company could not be updated.", completion: {}), animated: true, completion: { () -> Void in
                     
                 })
             }
@@ -89,7 +89,7 @@ class CompanySearchViewController : UIViewController, UITableViewDelegate, UITab
                 self.delegate?.didFinishTask("---")
             }
             else {
-                self.presentViewController(Standard.generateAlert("Error", message: "Company could not be updated."), animated: true, completion: { () -> Void in
+                self.presentViewController(Standard.generateAlert("Error", message: "Company could not be updated.", completion: {}), animated: true, completion: { () -> Void in
                     
                 })
             }

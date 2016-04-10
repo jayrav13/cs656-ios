@@ -11,7 +11,7 @@ import UIKit
 import SwiftyJSON
 import SwiftQRCode
 
-class ConnectionsListViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ConnectionsListViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, ScanQRCodeViewControllerDelegate {
     
     // TableView and JSON data
     var tableView : UITableView!
@@ -135,11 +135,11 @@ class ConnectionsListViewController : UIViewController, UITableViewDelegate, UIT
         }))
     
         actionSheet.addAction(UIAlertAction(title: "Scan QR Code", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-            let scanner = QRCode()
-            scanner.prepareScan(self.view, completion: { (stringValue) -> () in
-                print(stringValue)
-            })
-            scanner.scanFrame = self.view.bounds
+
+            let scvc: ScanQRCodeViewController = ScanQRCodeViewController()
+            scvc.delegate = self
+            self.navigationController?.pushViewController(scvc, animated: true)
+            
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action) -> Void in
@@ -161,7 +161,7 @@ class ConnectionsListViewController : UIViewController, UITableViewDelegate, UIT
                 self.navigationController?.pushViewController(svc, animated: true)
             }
             else {
-                self.presentViewController(Standard.generateAlert("Error", message: "User data could not be loaded."), animated: true, completion: { () -> Void in
+                self.presentViewController(Standard.generateAlert("Error", message: "User data could not be loaded.", completion: {}), animated: true, completion: { () -> Void in
                     
                 })
             }
@@ -169,6 +169,8 @@ class ConnectionsListViewController : UIViewController, UITableViewDelegate, UIT
         
     }
     
-    
+    func didConnectUser(success: Bool, name: String) {
+        
+    }
     
 }
