@@ -34,6 +34,9 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
     /* Companies */
     var companiesCell : UITableViewCell!
     
+    /* View Profile */
+    var profileCell : UITableViewCell!
+    
     /* Logout */
     var logoutCell : UITableViewCell!
     
@@ -56,6 +59,7 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
         self.nameTextField.font = UIFont(name: "AppleSDGothicNeo-Light", size: 20)
         self.nameTextField.text = self.data["response"]["name"].stringValue
         self.nameTextField.foregroundColor = UIColor.lightGrayColor()
+        self.nameTextField.autocorrectionType = UITextAutocorrectionType.No
         self.nameCell.addSubview(self.nameTextField)
         
         // construct first name cell, section 0, row 1
@@ -67,6 +71,9 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
         self.emailTextField.foregroundColor = UIColor.lightGrayColor()
         self.emailTextField.font = UIFont(name: "AppleSDGothicNeo-Light", size: 20)
         self.emailTextField.text = self.data["response"]["email"].stringValue
+        self.emailTextField.autocorrectionType = UITextAutocorrectionType.No
+        self.emailTextField.autocapitalizationType = UITextAutocapitalizationType.None
+        self.emailTextField.keyboardType = UIKeyboardType.EmailAddress
         self.emailCell.addSubview(self.emailTextField)
         
         // construct first name cell, section 1, row 0
@@ -78,6 +85,8 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
         self.twitterTextField.foregroundColor = UIColor.lightGrayColor()
         self.twitterTextField.font = UIFont(name: "AppleSDGothicNeo-Light", size: 20)
         self.twitterTextField.text = self.data["response"]["twitter"].stringValue
+        self.twitterTextField.autocorrectionType = UITextAutocorrectionType.No
+        self.twitterTextField.autocapitalizationType = UITextAutocapitalizationType.None
         self.twitterCell.addSubview(self.twitterTextField)
         
         // construct first name cell, section 1, row 0
@@ -89,6 +98,8 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
         self.linkedinTextField.foregroundColor = UIColor.lightGrayColor()
         self.linkedinTextField.font = UIFont(name: "AppleSDGothicNeo-Light", size: 20)
         self.linkedinTextField.text = self.data["response"]["linkedin"].stringValue
+        self.linkedinTextField.autocapitalizationType = UITextAutocapitalizationType.None
+        self.linkedinTextField.autocorrectionType = UITextAutocorrectionType.No
         self.linkedinCell.addSubview(self.linkedinTextField)
         
         // construct first name cell, section 1, row 0
@@ -100,6 +111,9 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
         self.resumeTextField.foregroundColor = UIColor.lightGrayColor()
         self.resumeTextField.font = UIFont(name: "AppleSDGothicNeo-Light", size: 20)
         self.resumeTextField.text = self.data["response"]["resume"].stringValue
+        self.resumeTextField.autocapitalizationType = UITextAutocapitalizationType.None
+        self.resumeTextField.autocorrectionType = UITextAutocorrectionType.No
+        self.resumeTextField.keyboardType = UIKeyboardType.URL
         self.resumeCell.addSubview(self.resumeTextField)
         
         // construct first name cell, section 1, row 0
@@ -111,6 +125,9 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
         self.websiteTextField.foregroundColor = UIColor.lightGrayColor()
         self.websiteTextField.font = UIFont(name: "AppleSDGothicNeo-Light", size: 20)
         self.websiteTextField.text = self.data["response"]["website"].stringValue
+        self.websiteTextField.autocorrectionType = UITextAutocorrectionType.No
+        self.websiteTextField.autocapitalizationType = UITextAutocapitalizationType.None
+        self.websiteTextField.keyboardType = UIKeyboardType.URL
         self.websiteCell.addSubview(self.websiteTextField)
         
         // companies cell
@@ -119,6 +136,12 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
         self.companiesCell.textLabel?.font = UIFont(name: "AppleSDGothicNeo-Light", size: 20)
         self.companiesCell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
 
+        //Admin
+        self.profileCell = UITableViewCell()
+        self.profileCell.textLabel?.text = "View Profile"
+        self.profileCell.textLabel?.font = UIFont(name: "AppleSDGothicNeo-Light", size: 20)
+        self.profileCell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        
         self.logoutCell = UITableViewCell()
         self.logoutCell.textLabel?.text = "Log Out"
         self.logoutCell.backgroundColor = UIColor.redColor()
@@ -146,7 +169,7 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
         case 0: return 2    // section 0 has 2 rows
         case 1: return 4    // section 1 has 1 row
         case 2: return 1
-        case 3: return 1
+        case 3: return 2
         default: fatalError("Unknown number of sections")
         }
     }
@@ -175,7 +198,8 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
             }
         case 3:
             switch(indexPath.row) {
-            case 0: return self.logoutCell
+            case 0: return self.profileCell
+            case 1: return self.logoutCell
             default: fatalError("Unknown row in section 3")
             }
         default: fatalError("Unknown section")
@@ -213,6 +237,17 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
         }
         
         if(indexPath.section == 3 && indexPath.row == 0) {
+            API.getUser({ (success, data) in
+                if(success) {
+                    let pvc : ProfileViewController = ProfileViewController()
+                    pvc.data = data["response"]
+                    self.navigationController?.pushViewController(pvc, animated: true)
+                }
+            })
+            
+        }
+        
+        if(indexPath.section == 3 && indexPath.row == 1) {
             // logout
             API.logoutUser({ (success, data) -> Void in
                 if(success) {
@@ -222,6 +257,8 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
             })
             print("Logout")
         }
+        
+        
         
     }
     
