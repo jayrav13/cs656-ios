@@ -37,6 +37,7 @@ class API {
     /*
      *  User Management Controller
      */
+    // Register
     static func registerUser(name: String, email: String, password: String, completion : (success: Bool, data: JSON) -> Void) -> Void {
         
         let parameters : [String : AnyObject] = [
@@ -45,7 +46,7 @@ class API {
             "password" : password,
         ]        
         
-        Alamofire.request(Method.POST, baseURL + "/user/login", parameters: parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { (response) -> Void in
+        Alamofire.request(Method.POST, baseURL + "/user/register", parameters: parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { (response) -> Void in
             
             if(response.response?.statusCode == 200) {
                 completion(success: true, data: JSON(response.result.value!))
@@ -56,6 +57,7 @@ class API {
         }
     }
     
+    // Login
     static func loginUser(email: String, password: String, completion: (success: Bool, data: JSON) -> Void) -> Void {
         
         let parameters: [String : AnyObject] = [
@@ -74,6 +76,7 @@ class API {
         }
     }
     
+    // Get
     static func getUser(completion : (success: Bool, data: JSON) -> Void) -> Void {
         
         let parameters : [String : AnyObject] = [
@@ -93,6 +96,51 @@ class API {
         
     }
     
+    static func editUser(name : String, email : String, twitter : String, linkedin : String, resume : String, website : String, completion : (success : Bool, data : JSON) -> Void) -> Void {
+        
+        let parameters : [String : AnyObject] = [
+            "name" : name,
+            "email" : email,
+            "twitter" : twitter,
+            "linkedin" : linkedin,
+            "resume" : resume,
+            "website" : website,
+            
+            "token" : LocalAPI.getUserToken()
+        ]
+        
+        Alamofire.request(Method.PUT, baseURL + "/user/edit", parameters: parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { (response) -> Void in
+            
+            if(response.response?.statusCode == 200) {
+                completion(success: true, data: JSON(response.result.value!))
+            }
+            else {
+                completion(success: false, data: nil)
+            }
+        }
+    }
+    
+    static func editUserCompany(company_id : Int, completion : (success : Bool, data : JSON) -> Void) -> Void {
+        
+        let parameters : [String : AnyObject]? = [
+            "token" : LocalAPI.getUserToken(),
+            "company_id" : company_id
+        ]
+        
+        Alamofire.request(Method.PUT, baseURL + "/user/edit", parameters: parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { (response) -> Void in
+            
+            if(response.response?.statusCode == 200) {
+                completion(success: true, data: JSON(response.result.value!))
+            }
+            else {
+                completion(success: false, data: nil)
+            }
+            
+        }
+        
+    }
+    
+    // Logout
     static func logoutUser(completion : (success : Bool, data : JSON) -> Void) -> Void {
         
         let parameters : [String : AnyObject] = [
@@ -100,6 +148,28 @@ class API {
         ]
         
         Alamofire.request(Method.POST, baseURL + "/user/logout", parameters: parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { (response) -> Void in
+            
+            if(response.response?.statusCode == 200) {
+                completion(success: true, data: JSON(response.result.value!))
+            }
+            else {
+                completion(success: false, data: nil)
+            }
+            
+        }
+        
+    }
+    
+    /*
+     *  Companies
+     */
+    static func companiesSearch(completion : (success : Bool, data : JSON) -> Void) -> Void {
+        
+        let parameters : [String : AnyObject] = [
+            "token" : LocalAPI.getUserToken()
+        ]
+        
+        Alamofire.request(Method.GET, baseURL + "/company/search", parameters: parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { (response) -> Void in
             
             if(response.response?.statusCode == 200) {
                 completion(success: true, data: JSON(response.result.value!))

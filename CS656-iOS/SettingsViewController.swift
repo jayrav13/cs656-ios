@@ -9,29 +9,33 @@
 import Foundation
 import UIKit
 import SwiftyJSON
+import TextFieldEffects
 
-class SettingsViewController: UITableViewController {
+class SettingsViewController: UITableViewController, CompanySearchViewControllerDelegate {
     
     /* Basic profile info */
-    var nameCell : UITableViewCell = UITableViewCell()
-    var emailCell : UITableViewCell = UITableViewCell()
+    var nameCell : UITableViewCell!
+    var emailCell : UITableViewCell!
     
-    var nameTextField : UITextField = UITextField()
-    var emailTextField : UITextField = UITextField()
+    var nameTextField : KaedeTextField!
+    var emailTextField : KaedeTextField!
     
     /* Social networks */
-    var twitterCell : UITableViewCell = UITableViewCell()
-    var linkedinCell : UITableViewCell = UITableViewCell()
-    var resumeCell : UITableViewCell = UITableViewCell()
-    var websiteCell : UITableViewCell = UITableViewCell()
+    var twitterCell : UITableViewCell!
+    var linkedinCell : UITableViewCell!
+    var resumeCell : UITableViewCell!
+    var websiteCell : UITableViewCell!
     
-    var twitterTextField : UITextField = UITextField()
-    var linkedinTextField : UITextField = UITextField()
-    var resumeTextField : UITextField = UITextField()
-    var websiteTextField : UITextField = UITextField()
+    var twitterTextField : KaedeTextField!
+    var linkedinTextField : KaedeTextField!
+    var resumeTextField : KaedeTextField!
+    var websiteTextField : KaedeTextField!
+    
+    /* Companies */
+    var companiesCell : UITableViewCell!
     
     /* Logout */
-    var logoutCell : UITableViewCell = UITableViewCell()
+    var logoutCell : UITableViewCell!
     
     var data : JSON!
     
@@ -44,59 +48,96 @@ class SettingsViewController: UITableViewController {
         self.title = "Settings"
         
         // construct first name cell, section 0, row 0
+        self.nameCell = UITableViewCell()
+        self.nameCell.frame = CGRect(x: 0, y: 0, width: Standard.screenWidth, height: 44)
         self.nameCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-        self.nameTextField = UITextField(frame: CGRectInset(self.nameCell.contentView.bounds, 15, 0))
+        self.nameTextField = KaedeTextField(frame: self.nameCell.frame)
         self.nameTextField.placeholder = "Name"
+        self.nameTextField.font = UIFont(name: "AppleSDGothicNeo-Light", size: 20)
         self.nameTextField.text = self.data["response"]["name"].stringValue
+        self.nameTextField.foregroundColor = UIColor.lightGrayColor()
         self.nameCell.addSubview(self.nameTextField)
         
         // construct first name cell, section 0, row 1
+        self.emailCell = UITableViewCell()
+        self.emailCell.frame = CGRect(x: 0, y: 0, width: Standard.screenWidth, height: 44)
         self.emailCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-        self.emailTextField = UITextField(frame: CGRectInset(self.emailCell.contentView.bounds, 15, 0))
+        self.emailTextField = KaedeTextField(frame: self.nameCell.frame)
         self.emailTextField.placeholder = "Email"
+        self.emailTextField.foregroundColor = UIColor.lightGrayColor()
+        self.emailTextField.font = UIFont(name: "AppleSDGothicNeo-Light", size: 20)
         self.emailTextField.text = self.data["response"]["email"].stringValue
         self.emailCell.addSubview(self.emailTextField)
         
         // construct first name cell, section 1, row 0
+        self.twitterCell = UITableViewCell()
+        self.twitterCell.frame = CGRect(x: 0, y: 0, width: Standard.screenWidth, height: 44)
         self.twitterCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-        self.twitterTextField = UITextField(frame: CGRectInset(self.twitterCell.contentView.bounds, 15, 0))
-        self.twitterTextField.placeholder = "Twitter"
+        self.twitterTextField = KaedeTextField(frame: self.nameCell.frame)
+        self.twitterTextField.placeholder = "@{handle}"
+        self.twitterTextField.foregroundColor = UIColor.lightGrayColor()
+        self.twitterTextField.font = UIFont(name: "AppleSDGothicNeo-Light", size: 20)
         self.twitterTextField.text = self.data["response"]["twitter"].stringValue
         self.twitterCell.addSubview(self.twitterTextField)
         
         // construct first name cell, section 1, row 0
+        self.linkedinCell = UITableViewCell()
+        self.linkedinCell.frame = CGRect(x: 0, y: 0, width: Standard.screenWidth, height: 44)
         self.linkedinCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-        self.linkedinTextField = UITextField(frame: CGRectInset(self.linkedinCell.contentView.bounds, 15, 0))
-        self.linkedinTextField.placeholder = "LinkedIn"
+        self.linkedinTextField = KaedeTextField(frame: self.nameCell.frame)
+        self.linkedinTextField.placeholder = "/in/{username}"
+        self.linkedinTextField.foregroundColor = UIColor.lightGrayColor()
+        self.linkedinTextField.font = UIFont(name: "AppleSDGothicNeo-Light", size: 20)
         self.linkedinTextField.text = self.data["response"]["linkedin"].stringValue
         self.linkedinCell.addSubview(self.linkedinTextField)
         
         // construct first name cell, section 1, row 0
+        self.resumeCell = UITableViewCell()
+        self.resumeCell.frame = CGRect(x: 0, y: 0, width: Standard.screenWidth, height: 44)
         self.resumeCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-        self.resumeTextField = UITextField(frame: CGRectInset(self.resumeCell.contentView.bounds, 15, 0))
-        self.resumeTextField.placeholder = "Resume"
+        self.resumeTextField = KaedeTextField(frame: self.nameCell.frame)
+        self.resumeTextField.placeholder = "Resume URL"
+        self.resumeTextField.foregroundColor = UIColor.lightGrayColor()
+        self.resumeTextField.font = UIFont(name: "AppleSDGothicNeo-Light", size: 20)
         self.resumeTextField.text = self.data["response"]["resume"].stringValue
         self.resumeCell.addSubview(self.resumeTextField)
         
         // construct first name cell, section 1, row 0
+        self.websiteCell = UITableViewCell()
+        self.websiteCell.frame = CGRect(x: 0, y: 0, width: Standard.screenWidth, height: 44)
         self.websiteCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-        self.websiteTextField = UITextField(frame: CGRectInset(self.websiteCell.contentView.bounds, 15, 0))
-        self.websiteTextField.placeholder = "Website"
+        self.websiteTextField = KaedeTextField(frame: self.nameCell.frame)
+        self.websiteTextField.placeholder = "Website URL"
+        self.websiteTextField.foregroundColor = UIColor.lightGrayColor()
+        self.websiteTextField.font = UIFont(name: "AppleSDGothicNeo-Light", size: 20)
         self.websiteTextField.text = self.data["response"]["website"].stringValue
         self.websiteCell.addSubview(self.websiteTextField)
+        
+        // companies cell
+        self.companiesCell = UITableViewCell()
+        self.companiesCell.textLabel?.text = data["response"]["company"]["company_name"].stringValue.characters.count > 0 ? data["response"]["company"]["company_name"].stringValue : "---"
+        self.companiesCell.textLabel?.font = UIFont(name: "AppleSDGothicNeo-Light", size: 20)
+        self.companiesCell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
 
+        self.logoutCell = UITableViewCell()
         self.logoutCell.textLabel?.text = "Log Out"
+        self.logoutCell.backgroundColor = UIColor.redColor()
+        self.logoutCell.textLabel?.textColor = UIColor.whiteColor()
+        self.logoutCell.textLabel?.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
+        self.logoutCell.textLabel?.textAlignment = NSTextAlignment.Center
         
         self.data = []
         
         self.saveBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: "saveButtonPressed:")
         self.navigationItem.rightBarButtonItem = self.saveBarButtonItem
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+
 
     }
     
     // Return the number of sections
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     // Return the number of rows for each section in your static table
@@ -105,6 +146,7 @@ class SettingsViewController: UITableViewController {
         case 0: return 2    // section 0 has 2 rows
         case 1: return 4    // section 1 has 1 row
         case 2: return 1
+        case 3: return 1
         default: fatalError("Unknown number of sections")
         }
     }
@@ -128,8 +170,13 @@ class SettingsViewController: UITableViewController {
             }
         case 2:
             switch(indexPath.row) {
-            case 0: return self.logoutCell
+            case 0: return self.companiesCell
             default: fatalError("Unknown row in section 2")
+            }
+        case 3:
+            switch(indexPath.row) {
+            case 0: return self.logoutCell
+            default: fatalError("Unknown row in section 3")
             }
         default: fatalError("Unknown section")
         }
@@ -140,7 +187,8 @@ class SettingsViewController: UITableViewController {
         switch(section) {
         case 0: return "Profile"
         case 1: return "Social"
-        case 2: return "Admin"
+        case 2: return "Company"
+        case 3: return "Admin"
         default: fatalError("Unknown section")
         }
     }
@@ -150,6 +198,21 @@ class SettingsViewController: UITableViewController {
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if(indexPath.section == 2 && indexPath.row == 0) {
+            API.companiesSearch({ (success, data) -> Void in
+                if(success) {
+                    let csvc : CompanySearchViewController = CompanySearchViewController()
+                    csvc.delegate = self
+                    csvc.data = data
+                    
+                    self.navigationController?.pushViewController(csvc, animated: true)
+                }
+                else {
+                    // Error
+                }
+            })
+        }
+        
+        if(indexPath.section == 3 && indexPath.row == 0) {
             // logout
             API.logoutUser({ (success, data) -> Void in
                 if(success) {
@@ -163,7 +226,26 @@ class SettingsViewController: UITableViewController {
     }
     
     func saveButtonPressed(sender: UIButton) {
-        
+        API.editUser(self.nameTextField.text!, email: self.emailTextField.text!, twitter: self.twitterTextField.text!, linkedin: self.linkedinTextField.text!, resume: self.resumeTextField.text!, website: self.websiteTextField.text!) { (success, data) -> Void in
+            
+            if(success) {
+                self.presentViewController(Standard.generateAlert("Success", message: "Profile edited successfully!"), animated: true, completion: { () -> Void in
+                    
+                })
+            }
+            else {
+                self.presentViewController(Standard.generateAlert("Error", message: "Unable to edit profile."), animated: true, completion: { () -> Void in
+                    
+                })
+            }
+            
+        }
+    }
+    
+    func didFinishTask(companyName : String) {
+        self.presentViewController(Standard.generateAlert("Success", message: "Company updated!"), animated: true, completion: { () -> Void in
+            self.companiesCell.textLabel?.text = companyName
+        })
     }
     
 }

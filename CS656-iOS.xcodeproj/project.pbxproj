@@ -10,6 +10,7 @@
 		A990966F6B17F11D3936577A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08D1EBBE7D0B9FB6F90DC7E8 /* Pods.framework */; };
 		E5218E911C670C7E00B02918 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5218E901C670C7E00B02918 /* API.swift */; };
 		E5218E931C670C9300B02918 /* Standard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5218E921C670C9300B02918 /* Standard.swift */; };
+		E568FE591CB9698D00304D21 /* CompanySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E568FE581CB9698D00304D21 /* CompanySearchViewController.swift */; };
 		E5968ECB1C65D8A400712F31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5968ECA1C65D8A400712F31 /* AppDelegate.swift */; };
 		E5968ECD1C65D8A400712F31 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5968ECC1C65D8A400712F31 /* ViewController.swift */; };
 		E5968ED01C65D8A500712F31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5968ECE1C65D8A500712F31 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 		E5968ED81C65D8A500712F31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5968ED61C65D8A500712F31 /* LaunchScreen.storyboard */; };
 		E5B35FD11CB34465007A1BBD /* UserManagementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B35FD01CB34465007A1BBD /* UserManagementController.swift */; };
 		E5C2C4EC1CADB55A006FE861 /* LocalAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C2C4EB1CADB55A006FE861 /* LocalAPI.swift */; };
+		E5E14BB21CB95209000CC03D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E14BB11CB95209000CC03D /* ProfileViewController.swift */; };
 		E5FDE9D21CB751C9005F1DAB /* ConnectionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FDE9D11CB751C9005F1DAB /* ConnectionsListViewController.swift */; };
 		E5FDE9D51CB805F7005F1DAB /* DisplayQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FDE9D41CB805F7005F1DAB /* DisplayQRCodeViewController.swift */; };
 		E5FDE9D71CB8958D005F1DAB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FDE9D61CB8958D005F1DAB /* SettingsViewController.swift */; };
@@ -29,6 +31,7 @@
 		D594DB9ECDB3B573C4794FAA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E5218E901C670C7E00B02918 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		E5218E921C670C9300B02918 /* Standard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Standard.swift; sourceTree = "<group>"; };
+		E568FE581CB9698D00304D21 /* CompanySearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanySearchViewController.swift; sourceTree = "<group>"; };
 		E5968EC71C65D8A400712F31 /* CS656-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CS656-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5968ECA1C65D8A400712F31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E5968ECC1C65D8A400712F31 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -39,6 +42,7 @@
 		E5968ED91C65D8A500712F31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5B35FD01CB34465007A1BBD /* UserManagementController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManagementController.swift; sourceTree = "<group>"; };
 		E5C2C4EB1CADB55A006FE861 /* LocalAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAPI.swift; sourceTree = "<group>"; };
+		E5E14BB11CB95209000CC03D /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E5FDE9D11CB751C9005F1DAB /* ConnectionsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionsListViewController.swift; sourceTree = "<group>"; };
 		E5FDE9D41CB805F7005F1DAB /* DisplayQRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayQRCodeViewController.swift; sourceTree = "<group>"; };
 		E5FDE9D61CB8958D005F1DAB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +131,8 @@
 				E5B35FD01CB34465007A1BBD /* UserManagementController.swift */,
 				E5FDE9D11CB751C9005F1DAB /* ConnectionsListViewController.swift */,
 				E5FDE9D61CB8958D005F1DAB /* SettingsViewController.swift */,
+				E5E14BB11CB95209000CC03D /* ProfileViewController.swift */,
+				E568FE581CB9698D00304D21 /* CompanySearchViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -280,7 +286,9 @@
 				E5FDE9D71CB8958D005F1DAB /* SettingsViewController.swift in Sources */,
 				E5218E931C670C9300B02918 /* Standard.swift in Sources */,
 				E5FDE9D51CB805F7005F1DAB /* DisplayQRCodeViewController.swift in Sources */,
+				E5E14BB21CB95209000CC03D /* ProfileViewController.swift in Sources */,
 				E5FDE9D21CB751C9005F1DAB /* ConnectionsListViewController.swift in Sources */,
+				E568FE591CB9698D00304D21 /* CompanySearchViewController.swift in Sources */,
 				E5968ECD1C65D8A400712F31 /* ViewController.swift in Sources */,
 				E5218E911C670C7E00B02918 /* API.swift in Sources */,
 				E5968ECB1C65D8A400712F31 /* AppDelegate.swift in Sources */,

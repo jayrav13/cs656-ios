@@ -131,6 +131,7 @@ class UserManagementController : UIViewController, UIScrollViewDelegate, UIGestu
         self.registerPasswordTextField.placeholderFontScale = CGFloat(1)
         self.registerPasswordTextField.frame = CGRect(x: Standard.screenWidth * 1.1, y: Standard.screenHeight * 0.3, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.075)
         self.registerPasswordTextField.layer.cornerRadius = 5
+        self.registerPasswordTextField.secureTextEntry = true
         self.scrollView.addSubview(self.registerPasswordTextField)
         
         self.registerRegisterButton = UIButton(type: UIButtonType.System)
@@ -138,7 +139,7 @@ class UserManagementController : UIViewController, UIScrollViewDelegate, UIGestu
         self.registerRegisterButton.userInteractionEnabled = true
         self.registerRegisterButton.setTitle("Register", forState: UIControlState.Normal)
         self.registerRegisterButton.titleLabel?.textAlignment = NSTextAlignment.Center
-        self.registerRegisterButton.addTarget(self, action: "loginLoginButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.registerRegisterButton.addTarget(self, action: "registerRegisterButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         self.scrollView.addSubview(self.registerRegisterButton)
         
         self.registerLoginButton = UIButton(type: UIButtonType.System)
@@ -146,7 +147,7 @@ class UserManagementController : UIViewController, UIScrollViewDelegate, UIGestu
         self.registerLoginButton.userInteractionEnabled = true
         self.registerLoginButton.setTitle("Login", forState: UIControlState.Normal)
         self.registerLoginButton.titleLabel?.textAlignment = NSTextAlignment.Center
-        self.registerLoginButton.addTarget(self, action: "registerRegisterButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.registerLoginButton.addTarget(self, action: "registerLoginButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         self.scrollView.addSubview(self.registerLoginButton)
         
         
@@ -185,7 +186,9 @@ class UserManagementController : UIViewController, UIScrollViewDelegate, UIGestu
         
         API.registerUser(self.registerNameTextField.text!, email: self.registerEmailTextField.text!, password: self.registerPasswordTextField.text!) { (success, data) -> Void in
             if(success) {
-                
+                print(data)
+                LocalAPI.setUserToken(data["message"]["token"].stringValue)
+                self.view.window?.rootViewController = UINavigationController(rootViewController: ConnectionsListViewController())
             }
             else {
                 self.presentViewController(Standard.generateAlert("Error", message: "Registration failed - please try again!"), animated: true, completion: { () -> Void in

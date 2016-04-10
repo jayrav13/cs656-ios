@@ -73,9 +73,11 @@ class ConnectionsListViewController : UIViewController, UITableViewDelegate, UIT
         self.navigationController?.setToolbarHidden(false, animated: true)
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         
-        // Get user connections
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         self.getConnections()
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -87,13 +89,16 @@ class ConnectionsListViewController : UIViewController, UITableViewDelegate, UIT
         let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell")
         cell.textLabel?.text = data["response"][indexPath.row]["name"].stringValue
         cell.textLabel?.font = UIFont(name: "AppleSDGothicNeo-Light", size: 20)
-        cell.detailTextLabel?.text = data["response"][indexPath.row]["company"]["company_name"].stringValue
+        cell.detailTextLabel?.text = data["response"][indexPath.row]["company"]["company_name"].stringValue.characters.count > 0 ? data["response"][indexPath.row]["company"]["company_name"].stringValue : data["response"][indexPath.row]["pivot"]["created_at"].stringValue
         cell.detailTextLabel?.font = UIFont(name: "AppleSDGothicNeo-Light", size: 16)
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let pvc : ProfileViewController = ProfileViewController()
+        pvc.data = self.data["response"][indexPath.row]
+        self.navigationController?.pushViewController(pvc, animated: true)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
