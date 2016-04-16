@@ -349,5 +349,66 @@ class API {
         
     }
     
+    /* Skills - DELETE requests */
+    static func deletePrimarySkill(skill : String, completion : (success : Bool, data : JSON) -> Void) -> Void {
+        
+        let parameters : [String : String] = [
+            "token" : LocalAPI.getUserToken(),
+            "skill" : skill
+        ]
+        
+        Alamofire.request(Method.POST, baseURL + "/job/primary/skills/delete", parameters : parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { (response) in
+            
+            if(response.response?.statusCode == 200) {
+                completion(success: true, data: JSON(response.result.value!))
+            }
+            else {
+                completion(success: false, data: nil)
+            }
+            
+        }
+        
+    }
+    
+    static func deleteSecondarySkill(skill : String, completion : (success : Bool, data : JSON) -> Void) -> Void {
+        
+        let parameters : [String : String] = [
+            "token" : LocalAPI.getUserToken(),
+            "skill" : skill
+        ]
+        
+        Alamofire.request(Method.POST, baseURL + "/job/secondary/skills/delete", parameters : parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { (response) in
+            
+            if(response.response?.statusCode == 200) {
+                completion(success: true, data: JSON(response.result.value!))
+            }
+            else {
+                completion(success: false, data: nil)
+            }
+            
+        }
+        
+    }
+    
+    static func deletePlatformSkill(platform : String, completion : (success : Bool, data : JSON) -> Void) -> Void {
+        
+        let parameters : [String : String] = [
+            "token" : LocalAPI.getUserToken(),
+            "platform" : platform
+        ]
+        
+        Alamofire.request(Method.POST, baseURL + "/job/platform/delete", parameters : parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { (response) in
+            
+            if(response.response?.statusCode == 200) {
+                completion(success: true, data: JSON(response.result.value!))
+            }
+            else {
+                completion(success: false, data: nil)
+            }
+            
+        }
+        
+    }
+    
     
 }

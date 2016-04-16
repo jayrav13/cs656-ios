@@ -25,6 +25,7 @@ class SkillsViewController : UIViewController, UITableViewDelegate, UITableViewD
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.allowsMultipleSelectionDuringEditing = true
         self.view.addSubview(self.tableView)
         
         self.addValueBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addButtonPressed:")
@@ -48,6 +49,112 @@ class SkillsViewController : UIViewController, UITableViewDelegate, UITableViewD
         let cell : UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell")!
         cell.textLabel?.text = data["response"][indexPath.row][0].stringValue
         return cell
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if(editingStyle == UITableViewCellEditingStyle.Delete) {
+            if(self.function == 1) {
+                API.deletePrimarySkill(self.data["response"][indexPath.row][0].stringValue, completion: { (success, data) in
+                    if(success) {
+                        API.getPrimarySkills({ (success, data) in
+                            if(success) {
+                                self.data = data
+                                self.tableView.reloadData()
+                                
+                                self.presentViewController(Standard.generateAlert("Success", message: "Skill deleted!", completion: {
+                                    
+                                }), animated: true, completion: {
+                                    
+                                })
+                            }
+                            else {
+                                self.presentViewController(Standard.generateAlert("Error", message: "Something went wrong. Please try again.", completion: {
+                                    
+                                }), animated: true, completion: {
+                                    
+                                })
+                            }
+                        })
+                    }
+                    else {
+                        self.presentViewController(Standard.generateAlert("Error", message: "Something went wrong. Please try again.", completion: {
+                            
+                        }), animated: true, completion: {
+                            
+                        })
+                    }
+                })
+            }
+            else if(self.function == 2) {
+                API.deleteSecondarySkill(self.data["response"][indexPath.row][0].stringValue, completion: { (success, data) in
+                    if(success) {
+                        API.getSecondarySkills({ (success, data) in
+                            if(success) {
+                                self.data = data
+                                self.tableView.reloadData()
+                                
+                                self.presentViewController(Standard.generateAlert("Success", message: "Skill deleted!", completion: {
+                                    
+                                }), animated: true, completion: {
+                                    
+                                })
+                            }
+                            else {
+                                self.presentViewController(Standard.generateAlert("Error", message: "Something went wrong. Please try again.", completion: {
+                                    
+                                }), animated: true, completion: {
+                                    
+                                })
+                            }
+                        })
+                    }
+                    else {
+                        self.presentViewController(Standard.generateAlert("Error", message: "Something went wrong. Please try again.", completion: {
+                            
+                        }), animated: true, completion: {
+                            
+                        })
+                    }
+                })
+            }
+            else {
+                API.deletePlatformSkill(self.data["response"][indexPath.row][0].stringValue, completion: { (success, data) in
+                    if(success) {
+                        API.getPlatforms({ (success, data) in
+                            if(success) {
+                                self.data = data
+                                self.tableView.reloadData()
+                                
+                                self.presentViewController(Standard.generateAlert("Success", message: "Skill deleted!", completion: {
+                                    
+                                }), animated: true, completion: {
+                                    
+                                })
+                            }
+                            else {
+                                self.presentViewController(Standard.generateAlert("Error", message: "Something went wrong. Please try again.", completion: {
+                                    
+                                }), animated: true, completion: {
+                                    
+                                })
+                            }
+                        })
+                    }
+                    else {
+                        self.presentViewController(Standard.generateAlert("Error", message: "Something went wrong. Please try again.", completion: {
+                            
+                        }), animated: true, completion: {
+                            
+                        })
+                    }
+                })
+            }
+            
+        }
     }
     
     func addButtonPressed(sender : UIButton) {
