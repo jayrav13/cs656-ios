@@ -139,7 +139,7 @@ class ProfileViewController : UIViewController, LGChatControllerDelegate {
     }
     
     func shouldChatController(chatController: LGChatController, addMessage message: LGChatMessage) -> Bool {
-        print(message.content)
+        // print(message.content)
         self.firebase.setValue([
             "from" : currentUser["id"].intValue,
             "to" : data["id"].intValue,

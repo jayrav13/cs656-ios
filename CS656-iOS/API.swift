@@ -223,4 +223,131 @@ class API {
         }
     }
     
+    /* Skills - GET requests */
+    
+    static func getPrimarySkills(completion : (success : Bool, data : JSON) -> Void) -> Void {
+        
+        let parameters : [String : AnyObject] = [
+            "token" : LocalAPI.getUserToken()
+        ]
+        
+        Alamofire.request(Method.GET, baseURL + "/job/primary/skills/get", parameters: parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { (response) in
+            
+            if(response.response?.statusCode == 200) {
+                completion(success: true, data: JSON(response.result.value!))
+            }
+            else {
+                print(JSON(response.result.value!))
+                completion(success: false, data: nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    static func getSecondarySkills(completion : (success : Bool, data : JSON) -> Void) -> Void {
+        
+        let parameters : [String : AnyObject] = [
+            "token" : LocalAPI.getUserToken()
+        ]
+        
+        Alamofire.request(Method.GET, baseURL + "/job/secondary/skills/get", parameters: parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { (response) in
+            
+            if(response.response?.statusCode == 200) {
+                completion(success: true, data: JSON(response.result.value!))
+            }
+            else {
+                print(JSON(response.result.value!))
+                completion(success: false, data: nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    static func getPlatforms(completion : (success : Bool, data : JSON) -> Void) -> Void {
+        
+        let parameters : [String : AnyObject] = [
+            "token" : LocalAPI.getUserToken()
+        ]
+        
+        Alamofire.request(Method.GET, baseURL + "/job/platform/get", parameters: parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { (response) in
+            
+            if(response.response?.statusCode == 200) {
+                completion(success: true, data: JSON(response.result.value!))
+            }
+            else {
+                print(JSON(response.result.value!))
+                completion(success: false, data: nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    /* Skills - POST requests */
+    static func addPrimarySkill(skill : String, completion : (success: Bool, data : JSON) -> Void) -> Void {
+        
+        let parameters : [String : AnyObject] = [
+            "token" : LocalAPI.getUserToken(),
+            "skill" : skill
+        ]
+        
+        Alamofire.request(Method.POST, baseURL + "/job/primary/skills/add", parameters: parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { (response) in
+            
+            if(response.response?.statusCode == 200) {
+                completion(success: true, data: JSON(response.result.value!))
+            }
+            else {
+                completion(success: false, data: nil)
+            }
+            
+        }
+        
+    }
+    
+    static func addSecondarySkill(skill : String, completion : (success: Bool, data : JSON) -> Void) -> Void {
+        
+        let parameters : [String : AnyObject] = [
+            "token" : LocalAPI.getUserToken(),
+            "skill" : skill
+        ]
+        
+        Alamofire.request(Method.POST, baseURL + "/job/secondary/skills/add", parameters: parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { (response) in
+            
+            if(response.response?.statusCode == 200) {
+                completion(success: true, data: JSON(response.result.value!))
+            }
+            else {
+                completion(success: false, data: nil)
+            }
+            
+        }
+        
+    }
+    
+    static func addPlatformSkill(platform : String, completion : (success: Bool, data : JSON) -> Void) -> Void {
+        
+        let parameters : [String : AnyObject] = [
+            "token" : LocalAPI.getUserToken(),
+            "platform" : platform
+        ]
+        
+        Alamofire.request(Method.POST, baseURL + "/job/platform/add", parameters: parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { (response) in
+            
+            if(response.response?.statusCode == 200) {
+                completion(success: true, data: JSON(response.result.value!))
+            }
+            else {
+                completion(success: false, data: nil)
+            }
+            
+        }
+        
+    }
+    
+    
 }

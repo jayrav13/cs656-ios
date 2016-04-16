@@ -34,6 +34,9 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
     /* Companies */
     var companiesCell : UITableViewCell!
     
+    /* Skills */
+    var skillsCell : UITableViewCell!
+    
     /* View Profile */
     var profileCell : UITableViewCell!
     
@@ -135,6 +138,11 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
         self.companiesCell.textLabel?.text = data["response"]["company"]["company_name"].stringValue.characters.count > 0 ? data["response"]["company"]["company_name"].stringValue : "---"
         self.companiesCell.textLabel?.font = UIFont(name: "AppleSDGothicNeo-Light", size: 20)
         self.companiesCell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        
+        self.skillsCell = UITableViewCell()
+        self.skillsCell.textLabel?.text = "Select Recruiter Skills"
+        self.skillsCell.textLabel?.font = UIFont(name: "AppleSDGothicNeo-Light", size: 20)
+        self.skillsCell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
 
         //Admin
         self.profileCell = UITableViewCell()
@@ -155,7 +163,6 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
         self.navigationItem.rightBarButtonItem = self.saveBarButtonItem
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
 
-
     }
     
     // Return the number of sections
@@ -168,7 +175,7 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
         switch(section) {
         case 0: return 2    // section 0 has 2 rows
         case 1: return 4    // section 1 has 1 row
-        case 2: return 1
+        case 2: return (self.companiesCell.textLabel?.text == "---" ? 1 : 2)
         case 3: return 2
         default: fatalError("Unknown number of sections")
         }
@@ -194,6 +201,7 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
         case 2:
             switch(indexPath.row) {
             case 0: return self.companiesCell
+            case 1: return self.skillsCell
             default: fatalError("Unknown row in section 2")
             }
         case 3:
@@ -258,6 +266,10 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
             print("Logout")
         }
         
+        if(indexPath.section == 2 && indexPath.row == 1) {
+            let qvc : QualificationViewController = QualificationViewController()
+            self.navigationController?.pushViewController(qvc, animated: true)
+        }
         
         
     }
@@ -282,6 +294,7 @@ class SettingsViewController: UITableViewController, CompanySearchViewController
     func didFinishTask(companyName : String) {
         self.presentViewController(Standard.generateAlert("Success", message: "Company updated!", completion: {}), animated: true, completion: { () -> Void in
             self.companiesCell.textLabel?.text = companyName
+            self.tableView.reloadData()
         })
     }
     
