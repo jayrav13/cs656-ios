@@ -153,7 +153,6 @@ class SkillsViewController : UIViewController, UITableViewDelegate, UITableViewD
                     }
                 })
             }
-            
         }
     }
     

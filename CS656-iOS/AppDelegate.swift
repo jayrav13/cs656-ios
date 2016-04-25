@@ -23,17 +23,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // If a token is set, move to the ConnectionsListViewController
         if(LocalAPI.userTokenSet()) {
+            API.getUser({ (success, data) in
+                if(success) {
+                    let clvc : ConnectionsListViewController = ConnectionsListViewController()
+                    self.window?.rootViewController = UINavigationController(rootViewController: clvc)
+                }
+                else {
+                    let umc : UserManagementController = UserManagementController()
+                    self.window?.rootViewController = UINavigationController(rootViewController: umc)
+                }
+            })
             let clvc : ConnectionsListViewController = ConnectionsListViewController()
-            window?.rootViewController = UINavigationController(rootViewController: clvc)
+            self.window?.rootViewController = UINavigationController(rootViewController: clvc)
         }
         // Else, move to te UserManagementController
         else {
             let umc : UserManagementController = UserManagementController()
-            window?.rootViewController = UINavigationController(rootViewController: umc)
+            self.window?.rootViewController = UINavigationController(rootViewController: umc)
         }
         
         // Make Key and Visible
-        window?.makeKeyAndVisible()
+        self.window?.makeKeyAndVisible()
         return true
     }
 

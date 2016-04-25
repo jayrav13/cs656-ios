@@ -1,0 +1,81 @@
+{
+	"name": "ConnectU",
+	"children": [
+		{
+			"name": "Camera Icon",
+			"children": [
+				{
+					"name": "Show QR Code",
+					"children": []
+				},
+				{
+					"name": "Scan QR Code",
+					"children": []
+				}
+			]
+		},
+		{
+			"name": "Settings Icon",
+			"children": [
+				{
+					"name": "Save",
+					"children": []
+				},
+				{
+					"name": "Select Company Name",
+					"children": []
+				},
+				{
+					"name": "Select Recruiter Skills",
+					"children": [
+						{
+							"name": "Primary Skills",
+							"children": []
+						},
+						{
+							"name": "Secondary Skill",
+							"children": []
+						},
+						{
+							"name": "Platforms",
+							"children": []
+						}
+					]
+				},
+				{
+					"name": "View Profile",
+					"children": []
+				},
+				{
+					"name": "Log Out",
+					"children": []
+				}
+			]
+		},
+		{
+			"name": "UITableViewCell",
+			"children": [
+				{
+					"name": "LinkedIn",
+					"children": []
+				},
+				{
+					"name": "Twitter",
+					"children": []
+				},
+				{
+					"name": "Resume",
+					"children": []
+				},
+				{
+					"name": "Website",
+					"children": []
+				},
+				{
+					"name": "Chat",
+					"children": []
+				}
+			]
+		}
+	]
+}
