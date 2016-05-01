@@ -71,6 +71,7 @@ class ConnectionsListViewController : UIViewController, UITableViewDelegate, UIT
         
         // Show toolbar, change back button title
         self.navigationController?.setToolbarHidden(false, animated: true)
+        self.toolbarItems = [ UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "openMLList:") ]
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         
     }
@@ -117,9 +118,9 @@ class ConnectionsListViewController : UIViewController, UITableViewDelegate, UIT
                 self.data = data
                 self.tableView.reloadData()
                 self.tableView.alpha = 1
+                print(data)
             }
             else {
-                // Error getting data
                 print("Uh oh")
             }
         }
@@ -170,6 +171,25 @@ class ConnectionsListViewController : UIViewController, UITableViewDelegate, UIT
     }
     
     func didConnectUser(success: Bool, name: String) {
+        
+    }
+    
+    func openMLList(sender : UIButton) {
+        
+        API.getMLList { (success, data) in
+            if(success) {
+                let ml : MLListViewController = MLListViewController()
+                ml.data = data
+                self.navigationController?.pushViewController(ml, animated: true)
+            }
+            else {
+                self.presentViewController(Standard.generateAlert("Error", message: "Failed to load ML List!", completion: { 
+                    
+                }), animated: true, completion: { 
+                    
+                })
+            }
+        }
         
     }
     

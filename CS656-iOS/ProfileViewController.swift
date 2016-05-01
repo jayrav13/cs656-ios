@@ -37,7 +37,7 @@ class ProfileViewController : UIViewController, LGChatControllerDelegate {
         self.nameLabel = UILabel()
         self.nameLabel.frame = CGRect(x: 0, y: Standard.screenHeight * 0.15, width: Standard.screenWidth, height: Standard.screenHeight * 0.1)
         self.nameLabel.text = self.data["name"].stringValue
-        self.nameLabel.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 48)
+        self.nameLabel.font = UIFont(name: "AppleSDGothicNeo-Thin", size: 48)
         self.nameLabel.textAlignment = NSTextAlignment.Center
         self.nameLabel.adjustsFontSizeToFitWidth = true
         self.view.addSubview(self.nameLabel)

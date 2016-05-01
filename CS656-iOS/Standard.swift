@@ -25,4 +25,8 @@ class Standard {
         
     }
     
+    static func defaultFont(size : CGFloat) -> UIFont {
+        return UIFont(name: "AppleSDGothicNeo-Light", size: size)!
+    }
+    
 }

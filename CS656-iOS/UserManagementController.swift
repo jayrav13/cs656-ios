@@ -40,11 +40,16 @@ class UserManagementController : UIViewController, UIScrollViewDelegate, UIGestu
     var registerRegisterButton : UIButton!
     var registerLoginButton : UIButton!
     
+    /*
+     *  ImageView
+     */
+    var imageView : UIImageView!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         self.title = "Login"
-        self.view.backgroundColor = UIColor(red: 239/255, green: 239/255, blue: 244/255, alpha: 1)
+        self.view.backgroundColor = UIColor(red: 54/255, green: 92/255, blue: 140/255, alpha: 1)
         self.view.userInteractionEnabled = true
         
         self.scrollView = UIScrollView()
@@ -61,18 +66,20 @@ class UserManagementController : UIViewController, UIScrollViewDelegate, UIGestu
         self.loginEmailTextField.placeholderFontScale = CGFloat(1)
         self.loginEmailTextField.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.1, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.075)
         self.loginEmailTextField.layer.cornerRadius = 5
-        self.loginEmailTextField.placeholderColor = UIColor.whiteColor()
-        self.loginEmailTextField.foregroundColor = UIColor(red: 18/255, green: 68/255, blue: 187/255, alpha: 1)
-        self.loginEmailTextField.backgroundColor = UIColor(red: 147/255, green: 201/255, blue: 254/255, alpha: 1)
+        self.loginEmailTextField.font = Standard.defaultFont(16)
+        self.loginEmailTextField.placeholderColor = UIColor.blackColor()
+        self.loginEmailTextField.foregroundColor = UIColor(red: 147/255, green: 201/255, blue: 254/255, alpha: 1)
+        self.loginEmailTextField.backgroundColor = UIColor.whiteColor()
         self.loginEmailTextField.autocapitalizationType = UITextAutocapitalizationType.None
         self.loginEmailTextField.autocorrectionType = UITextAutocorrectionType.No
         self.scrollView.addSubview(self.loginEmailTextField)
         
         self.loginPasswordTextField = KaedeTextField()
         self.loginPasswordTextField.placeholder = "Password"
-        self.loginPasswordTextField.placeholderColor = UIColor.whiteColor()
-        self.loginPasswordTextField.foregroundColor = UIColor(red: 18/255, green: 68/255, blue: 187/255, alpha: 1)
-        self.loginPasswordTextField.backgroundColor = UIColor(red: 147/255, green: 201/255, blue: 254/255, alpha: 1)
+        self.loginPasswordTextField.font = Standard.defaultFont(16)
+        self.loginPasswordTextField.placeholderColor = UIColor.blackColor()
+        self.loginPasswordTextField.foregroundColor = UIColor(red: 147/255, green: 201/255, blue: 254/255, alpha: 1)
+        self.loginPasswordTextField.backgroundColor = UIColor.whiteColor()
         self.loginPasswordTextField.placeholderFontScale = CGFloat(1)
         self.loginPasswordTextField.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.2, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.075)
         self.loginPasswordTextField.layer.cornerRadius = 5
@@ -80,18 +87,24 @@ class UserManagementController : UIViewController, UIScrollViewDelegate, UIGestu
         self.scrollView.addSubview(self.loginPasswordTextField)
         
         self.loginLoginButton = UIButton(type: UIButtonType.System)
-        self.loginLoginButton.frame = CGRect(x: Standard.screenWidth * 0.25, y: Standard.screenHeight * 0.4, width: Standard.screenWidth * 0.25, height: Standard.screenHeight * 0.1)
+        self.loginLoginButton.frame = CGRect(x: Standard.screenWidth * 0.25, y: Standard.screenHeight * 0.4, width: Standard.screenWidth * 0.2, height: Standard.screenHeight * 0.05)
         self.loginLoginButton.userInteractionEnabled = true
+        self.loginLoginButton.backgroundColor = UIColor(red: 147/255, green: 201/255, blue: 254/255, alpha: 1)
         self.loginLoginButton.setTitle("Login", forState: UIControlState.Normal)
         self.loginLoginButton.titleLabel?.textAlignment = NSTextAlignment.Center
+        self.loginLoginButton.layer.cornerRadius = 5
+        self.loginLoginButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.loginLoginButton.addTarget(self, action: "loginLoginButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         self.scrollView.addSubview(self.loginLoginButton)
         
         self.loginRegisterButton = UIButton(type: UIButtonType.System)
-        self.loginRegisterButton.frame = CGRect(x: Standard.screenWidth * 0.5, y: Standard.screenHeight * 0.4, width: Standard.screenWidth * 0.25, height: Standard.screenHeight * 0.1)
+        self.loginRegisterButton.frame = CGRect(x: Standard.screenWidth * 0.55, y: Standard.screenHeight * 0.4, width: Standard.screenWidth * 0.2, height: Standard.screenHeight * 0.05)
         self.loginRegisterButton.userInteractionEnabled = true
         self.loginRegisterButton.setTitle("Register", forState: UIControlState.Normal)
         self.loginRegisterButton.titleLabel?.textAlignment = NSTextAlignment.Center
+        self.loginRegisterButton.backgroundColor = UIColor(red: 147/255, green: 201/255, blue: 254/255, alpha: 1)
+        self.loginRegisterButton.layer.cornerRadius = 5
+        self.loginRegisterButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.loginRegisterButton.addTarget(self, action: "loginRegisterButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         self.scrollView.addSubview(self.loginRegisterButton)
         
@@ -149,6 +162,11 @@ class UserManagementController : UIViewController, UIScrollViewDelegate, UIGestu
         self.registerLoginButton.titleLabel?.textAlignment = NSTextAlignment.Center
         self.registerLoginButton.addTarget(self, action: "registerLoginButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         self.scrollView.addSubview(self.registerLoginButton)
+        
+        self.imageView = UIImageView()
+        self.imageView.frame = CGRect(x: Standard.screenWidth / 2 - Standard.screenWidth * 0.2, y: Standard.screenHeight * 0.6, width: Standard.screenWidth * 0.4, height: Standard.screenWidth * 0.4)
+        self.imageView.image = UIImage(named: "business")
+        self.view.addSubview(self.imageView)
         
         
     }

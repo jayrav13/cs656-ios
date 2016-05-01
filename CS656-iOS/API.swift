@@ -410,5 +410,24 @@ class API {
         
     }
     
+    static func getMLList(completion : (success : Bool, data : JSON) -> Void) -> Void {
+        
+        let parameters = [
+            "token" : LocalAPI.getUserToken()
+        ]
+        
+        Alamofire.request(Method.GET, baseURL + "/ml/get", parameters: parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { (response) in
+            
+            if(response.response?.statusCode == 200) {
+                completion(success: true, data: JSON(response.result.value!))
+            }
+            else {
+                completion(success: false, data: nil)
+            }
+            
+        }
+        
+    }
+    
     
 }
